@@ -1,6 +1,6 @@
 from typing import Annotated
-from fastapi import FastAPI,Depends, HTTPException,Query
-from sqlmodel import Field,Session,SQLModel,create_engine,select
+from fastapi import FastAPI,Depends, HTTPException,Query    
+from sqlmodel import Field,Session,SQLModel,create_engine
 from datetime import datetime
 from contextlib import asynccontextmanager
 
@@ -25,12 +25,7 @@ def start_session():
 
 SessionDep = Annotated[Session,Depends(start_session)]
 
-@asynccontextmanager  #instead of on_event which makes the code run only one time
-async def lifespan(app: FastAPI):
-    create_all_eng()
-    yield
 
-app = FastAPI(lifespan=lifespan)
 
 #expections
 # endpoints for (get_all, get_by_id, update (the time changes when update), create ,delete )
