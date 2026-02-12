@@ -4,8 +4,18 @@ from datetime import datetime
 
 # -------- Base Schema --------
 class NoteBase(BaseModel):
+    id: int | None = None
     title: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = Field(None, max_length=5000)
+
+    model_config={
+        "json_schema_extra":{
+            "example":{
+                "title":"Add a short title..",
+                "description":"Describe you note.."
+            }
+        }
+    }
 
 # -------- Create Schema --------
 class NoteCreate(NoteBase):
@@ -13,8 +23,18 @@ class NoteCreate(NoteBase):
 
 # -------- Update Schema --------
 class NoteUpdate(BaseModel):
+    id: int | None = None
     title: Optional[str] = Field(None, min_length=1, max_length=100)
     description: Optional[str] = Field(None, max_length=1000)
+
+    model_config={
+        "json_schema_extra":{
+            "example":{
+                "title":"Add a short title..",
+                "description":"Describe you note.."
+            }
+        }
+    }
 
 # -------- Response Schema --------
 class NoteResponse(NoteBase):
