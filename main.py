@@ -1,10 +1,16 @@
 from fastapi import FastAPI, Depends
+from fastapi.requests import Request
+from fastapi.templating import Jinja2Templates
 from contextlib import asynccontextmanager
 from typing import Annotated
 
 from manager import NoteManager
 from model import create_all_eng, SessionDep
 from schemas import NoteCreate, NoteUpdate, NoteResponse
+
+# ---------------- Simple frontend ----------------
+template = Jinja2Templates(directory="template")
+
 
 
 # ---------------- Dependencies ----------------
@@ -58,5 +64,6 @@ def delete_note(note_id: int, manager: ManagerDep):
 
 # Root
 @app.get("/")
-def read_root():
+def read_root(request:Request):
+    return template.TemplateResponse(request,"home.html")
     return {"message": "Welcome to the Notes API! Go to /docs to test it."}
