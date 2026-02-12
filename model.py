@@ -1,21 +1,23 @@
 from typing import Annotated
-from fastapi import FastAPI,Depends, HTTPException,Query    
-from sqlmodel import Field,Session,SQLModel,create_engine
+from fastapi import Depends
+from sqlmodel import Field, Session, SQLModel, create_engine
 from datetime import datetime
-from contextlib import asynccontextmanager
 
-class Note(SQLModel,table=True):
-    id: int | None= Field(default=None,primary_key=True)
-    title: str
-    description: str | None = None
-    time : datetime = Field(default_factory=datetime.now)
+# -------- Model --------
+class Note(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    title: str = Field(min_length=1, max_length=100)
+    description: str | None = Field(default=None, max_length=5000)  
+    time: datetime = Field(default_factory=datetime.now)
 
+# -------- Database setup --------
 database = "sqlite:///database.db"
-engine = create_engine(database,connect_args={"check_same_thread":False})
+engine = create_engine(database, connect_args={"check_same_thread": False})
 
 def create_all_eng():
     SQLModel.metadata.create_all(engine)
 
+# -------- Session dependency --------
 def start_session():
     with Session(engine) as session:
         try:
@@ -23,19 +25,4 @@ def start_session():
         finally:
             session.close()
 
-SessionDep = Annotated[Session,Depends(start_session)]
-
-
-
-#expections
-# endpoints for (get_all, get_by_id, update (the time changes when update), create ,delete )
-# use HTTPExecption for common errors (e.g., status_code=404 if the id you get is not found)
-
-
-# for more, use from fastapi.templating -> Jinja2Templates for frontend 
-
-
-
-
-
-
+SessionDep = Annotated[Session, Depends(start_session)]
