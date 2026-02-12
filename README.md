@@ -1,6 +1,6 @@
 # Notes Management API
 
-A lightweight and professional **Notes Management API** built with **FastAPI** and **SQLModel**.  
+A lightweight **Notes Management API** built with **FastAPI** and **SQLModel**.  
 This project provides a clean and simple solution to manage notes with **CRUD functionality**, built-in **validation**, and automatic **timestamps** for tracking changes.
 
 ---
@@ -62,34 +62,7 @@ The API is built with **modern Python tools**, ensuring speed, reliability, and 
 
 ---
 
-## 💡 Example Usage
-
-**Create a Note:**
-```json
-POST /notes/
-{
-  "title": "Project Meeting",
-  "description": "Discuss milestones and deadlines"
-}
-
-Update a Note:
-
-PATCH /notes/1
-{
-  "title": "Updated Project Meeting"
-}
-
-
-Get All Notes:
-
-GET /notes/?offset=0&limit=10
-
-
-Delete a Note:
-
-DELETE /notes/1
-
-🔗 Documentation
+## 🔗 Documentation
 
 Interactive API docs are automatically available at:
 
@@ -97,18 +70,7 @@ Swagger UI: http://127.0.0.1:8000/docs
 
 ReDoc: http://127.0.0.1:8000/redoc
 
-
-📂 Installation & Setup (Optional)
-
-For developers who want to run it locally:
-
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
-python -m venv .venv
-source .venv/bin/activate  # Linux / MacOS
-.venv\Scripts\activate     # Windows
-pip install -r requirements.txt
-uvicorn main:app --reload
+---
 
 
-Enjoy your Notes API 😍🎀
+## Enjoy your Notes API 😍🎀
