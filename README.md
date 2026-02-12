@@ -72,5 +72,17 @@ ReDoc: http://127.0.0.1:8000/redoc
 
 ---
 
+## Expcetions for update & upgrade
+
+- Add more layouts for the webpage
+- Add tasks features
+- Frontend featues soon..
+- Implement AI models
+
+##### stay turnd on for more updates!
+
+---
+
 
 ## Enjoy your Notes API 😍🎀
+
