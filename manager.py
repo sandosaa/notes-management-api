@@ -1,11 +1,15 @@
-from model import Note, Session
-from schemas import NoteCreate, NoteUpdate
-from sqlmodel import select
-from fastapi import HTTPException
+from collections.abc import Sequence
 from datetime import datetime
 
+from fastapi import HTTPException
+from sqlmodel import Session, select
+
+from model import Note
+from schemas import NoteCreate, NoteUpdate
+
+
 class NoteManager:
-    def __init__(self, session: Session):
+    def __init__(self, session: Session) -> None:
         self.session = session
 
     # ---------------- CREATE ----------------
@@ -14,7 +18,7 @@ class NoteManager:
         note = Note(
             title=note_data.title,
             description=note_data.description,
-            time=datetime.now()  # Auto-generate timestamp
+            time=datetime.now(),  # Auto-generate timestamp
         )
         self.session.add(note)
         self.session.commit()
@@ -22,7 +26,7 @@ class NoteManager:
         return note
 
     # ---------------- READ ALL ----------------
-    def get_all(self, offset: int = 0, limit: int = 10):
+    def get_all(self, offset: int = 0, limit: int = 10) -> Sequence[Note]:
         statement = select(Note).offset(offset).limit(limit)
         return self.session.exec(statement).all()
 
@@ -36,22 +40,22 @@ class NoteManager:
     # ---------------- UPDATE ----------------
     def update(self, note_id: int, note_data: NoteUpdate) -> Note:
         db_note = self.get_by_id(note_id)
-        
+
         # Update only the fields sent in the request
         update_data = note_data.model_dump(exclude_unset=True)
         for key, value in update_data.items():
             setattr(db_note, key, value)
-        
+
         # Update the timestamp automatically
         db_note.time = datetime.now()
-        
+
         self.session.add(db_note)
         self.session.commit()
         self.session.refresh(db_note)
         return db_note
 
     # ---------------- DELETE ----------------
-    def delete(self, note_id: int):
+    def delete(self, note_id: int) -> dict[str, str]:
         db_note = self.get_by_id(note_id)
         self.session.delete(db_note)
         self.session.commit()

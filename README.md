@@ -1,14 +1,15 @@
 # Notes Management API
 
-A lightweight **Notes Management API** built with **FastAPI** and **SQLModel**.  
+A lightweight **Notes Management API** built with **FastAPI** and **SQLModel**.
 This project provides a clean and simple solution to manage notes with **CRUD functionality**, built-in **validation**, and automatic **timestamps** for tracking changes.
 
 ---
 
 ## 📝 Project Overview
 
-This API allows users to **create, read, update, and delete notes** efficiently.  
+This API allows users to **create, read, update, and delete notes** efficiently.
 Each note has:
+
 - A **title** (required)
 - An optional **description**
 - A **timestamp** recording creation or last update
@@ -26,6 +27,8 @@ The API is built with **modern Python tools**, ensuring speed, reliability, and 
 - **Validation** – Prevent empty titles and enforce max lengths.
 - **FastAPI powered** – Provides automatic **interactive API docs** via Swagger UI.
 - **Lightweight Database** – Uses SQLite for simplicity, no heavy setup required.
+- **Simple & Secure** – Built with security best practices in mind.
+- **UV** – Modern fast project manager written in rust .
 
 ---
 
@@ -35,6 +38,7 @@ The API is built with **modern Python tools**, ensuring speed, reliability, and 
 - **FastAPI** – Fast, asynchronous API framework
 - **SQLModel** – Combines SQLAlchemy with Pydantic models
 - **SQLite** – Simple, serverless database
+- **uv** - Modern fast project manager written in rust .
 - **Uvicorn** – ASGI server for running the app
 
 ---
@@ -51,14 +55,14 @@ The API is built with **modern Python tools**, ensuring speed, reliability, and 
 
 ## 📂 API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST   | `/notes/` | Create a new note |
-| GET    | `/notes/` | List all notes (supports offset & limit) |
-| GET    | `/notes/{note_id}` | Get a single note by ID |
-| PATCH  | `/notes/{note_id}` | Update a note by ID |
-| DELETE | `/notes/{note_id}` | Delete a note by ID |
-| GET    | `/` | Root endpoint with welcome message |
+| Method | Endpoint           | Description                              |
+| ------ | ------------------ | ---------------------------------------- |
+| POST   | `/notes/`          | Create a new note                        |
+| GET    | `/notes/`          | List all notes (supports offset & limit) |
+| GET    | `/notes/{note_id}` | Get a single note by ID                  |
+| PATCH  | `/notes/{note_id}` | Update a note by ID                      |
+| DELETE | `/notes/{note_id}` | Delete a note by ID                      |
+| GET    | `/docs`            | Documentation for the API                |
 
 ---
 
@@ -76,13 +80,11 @@ ReDoc: http://127.0.0.1:8000/redoc
 
 - Add more layouts for the webpage
 - Add tasks features
-- Frontend featues soon..
-- Implement AI models
+- Frontend features soon..
+- Implement ML models
 
 ##### stay turnd on for more updates!
 
 ---
 
-
-## Enjoy your Notes API 😍🎀
-
+## Enjoy your Notes API
