@@ -2,9 +2,9 @@ from collections.abc import Sequence
 from datetime import datetime
 
 from fastapi import HTTPException
+from model import Note
 from sqlmodel import Session, select
 
-from model import Note
 from schemas import NoteCreate, NoteUpdate
 
 
