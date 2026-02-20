@@ -1,6 +1,23 @@
+from enum import Enum
 from datetime import datetime
+from typing import List
+from sqlmodel import Field, SQLModel, Relationship
 
-from sqlmodel import Field, SQLModel
+class CategoryType(str,Enum):
+    PERSONAL = 'personal'
+    STUDY = "study"
+    WORK = "work"
+    HOME = "home"
+    HEALTH = "health"
+    IDEA = 'idea'
+    OTHER = "other"
+
+class Category(SQLModel,table=True):
+    id: int | None = Field(default=None,primary_key=True,index=True)
+
+    types: CategoryType = Field(default=CategoryType.PERSONAL) # we will make a static database for it now. 
+    # maybe in the feature will make the user makes its list of category
+    notes: List["Note"] = Relationship(back_populates="category") 
 
 
 class Note(SQLModel, table=True):
@@ -30,6 +47,12 @@ class Note(SQLModel, table=True):
     # SHAHD.
     description: str | None = Field(default=None, max_length=5000)
 
+    priority: int = Field(lt=6,gt=0,default=1)
+
+    category_id: int = Field(foreign_key="category.id")
+
+    category: Category = Relationship(back_populates="notes")
+    
     # TEACHING: Automatic Timestamps
     # 'default_factory=datetime.now' is a powerful feature.
     # Instead of a static value, it calls the function 'datetime.now'
