@@ -16,12 +16,16 @@ class NoteBase(BaseModel):
 
     title: str = Field(..., min_length=1, max_length=100)
     description: str | None = Field(None, max_length=5000)
+    priority: int = Field(lt=6,gt=0,default=1)
+    category_id: int 
 
     model_config = {
         "json_schema_extra": {
             "example": {
                 "title": "Grocery List",
                 "description": "Buy milk, eggs, and bread",
+                "priority": 3,
+                "category_id": 1,
             }
         }
     }
@@ -49,12 +53,17 @@ class NoteUpdate(BaseModel):
 
     title: str | None = Field(None, min_length=1, max_length=100)
     description: str | None = Field(None, max_length=5000)
+    priority: int | None = Field(None,lt=6,gt=0,default=1)
+    category_id: int | None = None
+
 
     model_config = {
         "json_schema_extra": {
             "example": {
                 "title": "Updated Grocery List",
                 "description": "Buy milk, eggs, bread, and butter",
+                "priority": 3,
+                "category_id": 1,
             }
         }
     }
